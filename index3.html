@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Sofía 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --text: #f0e8e0;
+    --accent: #c9a87c;
+    --soft: rgba(201,168,124,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  /* Capa de grano */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* Glow superior */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(201,168,124,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  header {
+    text-align: center;
+    padding: 80px 20px 40px;
+  }
+
+  header .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    animation: fadeUp 1s ease forwards;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--text);
+    animation: fadeUp 1s ease forwards 0.3s;
+    opacity: 0;
+  }
+
+  header h1 em { font-style: italic; color: var(--accent); }
+
+  /* Contenedor Principal de Galería */
+  .gallery-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .row-label {
+    text-align: center;
+    font-size: clamp(10px, 2vw, 13px);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 40px 0 20px;
+    opacity: 0.7;
+  }
+
+  .strip-section {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Permite que las letras bajen si no hay espacio */
+    gap: 12px;
+    margin-bottom: 60px;
+  }
+
+  /* Estilo de cada "letra" o strip */
+  .strip {
+    position: relative;
+    flex: 0 1 140px; /* Tamaño base de 140px, puede encogerse */
+    aspect-ratio: 2 / 4.5; /* Relación de aspecto estética */
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    background: #15151a;
+  }
+
+  .strip img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+    filter: grayscale(20%);
+  }
+
+  .strip .letter-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 15%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+  }
+
+  .strip .letter-overlay span {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(201,168,124,0.6);
+  }
+
+  /* Hover */
+  .strip:hover { transform: translateY(-10px); }
+  .strip:hover img { transform: scale(1.1); filter: grayscale(0%); }
+
+  /* Adaptación para "Muchísimo" */
+  .muchisimo-section .strip {
+    flex: 0 1 100px; /* Letras un poco más delgadas para que quepan más */
+  }
+
+  .message-section {
+    text-align: center;
+    padding: 60px 20px 100px;
+  }
+
+  .message-section p {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: rgba(240,232,224,0.7);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .heart {
+    display: block;
+    margin-top: 30px;
+    font-size: 2rem;
+    animation: pulse 2s infinite;
+  }
+
+  /* Keyframes */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+  }
+
+  /* Media Queries para Móviles */
+  @media (max-width: 768px) {
+    .strip-section { gap: 8px; }
+    .strip { flex: 0 1 18%; } /* 5 letras por fila aproximadamente */
+    .muchisimo-section .strip { flex: 0 1 28%; } /* 3 letras por fila en Muchísimo */
+    header { padding-top: 40px; }
+  }
+
+  @media (max-width: 480px) {
+    .strip { flex: 0 1 30%; } /* 3 letras por fila */
+    .muchisimo-section .strip { flex: 0 1 30%; } 
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>JHOSELIN,<br><em>te amo</em><br>muchísimo</h1>
+</header>
+
+<div class="gallery-container">
+  
+  <!-- SECCIÓN SOFÍA -->
+  <p class="row-label">S · O · F · I · A</p>
+  <div class="strip-section">
+    <div class="strip"><img src="img/s.png" alt="S"><div class="letter-overlay"><span>S</span></div></div>
+    <div class="strip"><img src="img/o.png" alt="O"><div class="letter-overlay"><span>O</span></div></div>
+    <div class="strip"><img src="img/f.png" alt="F"><div class="letter-overlay"><span>F</span></div></div>
+    <div class="strip"><img src="img/i (1).png" alt="I"><div class="letter-overlay"><span>I</span></div></div>
+    <div class="strip"><img src="img/a.png" alt="A"><div class="letter-overlay"><span>A</span></div></div>
+  </div>
+
+  <!-- SECCIÓN TE AMO -->
+  <p class="row-label">T · E &nbsp; A · M · O</p>
+  <div class="strip-section">
+    <div class="strip"><img src="img/t.png" alt="T"><div class="letter-overlay"><span>T</span></div></div>
+    <div class="strip"><img src="img/e.png" alt="E"><div class="letter-overlay"><span>E</span></div></div>
+    <div class="strip"><img src="img/a.png" alt="A"><div class="letter-overlay"><span>A</span></div></div>
+    <div class="strip"><img src="img/m (2).png" alt="M"><div class="letter-overlay"><span>M</span></div></div>
+    <div class="strip"><img src="img/o (1).png" alt="O"><div class="letter-overlay"><span>O</span></div></div>
+  </div>
+
+  <!-- SECCIÓN MUCHÍSIMO -->
+  <p class="row-label">M · U · C · H · I · S · I · M · O</p>
+  <div class="strip-section muchisimo-section">
+    <div class="strip"><img src="img/m (1).png" alt="M"><div class="letter-overlay"><span>M</span></div></div>
+    <div class="strip"><img src="img/u.png" alt="U"><div class="letter-overlay"><span>U</span></div></div>
+    <div class="strip"><img src="img/c (1).png" alt="C"><div class="letter-overlay"><span>C</span></div></div>
+    <div class="strip"><img src="img/h.png" alt="H"><div class="letter-overlay"><span>H</span></div></div>
+    <div class="strip"><img src="img/i (1).png" alt="I"><div class="letter-overlay"><span>I</span></div></div>
+    <div class="strip"><img src="img/s.png" alt="S"><div class="letter-overlay"><span>S</span></div></div>
+    <div class="strip"><img src="img/i.png" alt="I"><div class="letter-overlay"><span>I</span></div></div>
+    <div class="strip"><img src="img/m.png" alt="M"><div class="letter-overlay"><span>M</span></div></div>
+    <div class="strip"><img src="img/o.png" alt="O"><div class="letter-overlay"><span>O</span></div></div>
+  </div>
+
+</div>
+
+<div class="message-section">
+  <p>Desde los ríos serpenteantes hasta los volcanes en llamas,<br>
+  cada rincón de la Tierra tiene algo tuyo.</p>
+  <span class="heart">❤️</span>
+</div>
+
+</body>
+</html>
